@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "Mouse",
+    "price": 500,
+    "stock": true
+  },
+  {
+    "id": 2,
+    "name": "Keyboard",
+    "price": 1200,
+    "stock": true
+  },
+  {
+    "id": 3,
+    "name": "Monitor",
+    "price": 8500,
+    "stock": false
+  },
+  {
+    "id": 4,
+    "name": "Laptop",
+    "price": 55000,
+    "stock": true
+  },
+  {
+    "id": 5,
+    "name": "Headphone",
+    "price": 1500,
+    "stock": true
+  },
+  {
+    "id": 6,
+    "name": "Speaker",
+    "price": 2200,
+    "stock": false
+  },
+  {
+    "id": 7,
+    "name": "Webcam",
+    "price": 3000,
+    "stock": true
+  },
+  {
+    "id": 8,
+    "name": "Printer",
+    "price": 9500,
+    "stock": true
+  },
+  {
+    "id": 9,
+    "name": "Tablet",
+    "price": 18000,
+    "stock": false
+  },
+  {
+    "id": 10,
+    "name": "Phone",
+    "price": 25000,
+    "stock": true
+  }
+]
