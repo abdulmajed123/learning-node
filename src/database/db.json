@@ -6,6 +6,5 @@
     "stock": true,
     "image": "https://images.unsplash.com/photo-1527814050087-3793815479db"
   },
-  { "id": 2, "name": "Mouse 3", "price": 1000, "stock": false },
   { "id": 1779598719538, "name": "Mouse 3", "price": 1000, "stock": false }
 ]
