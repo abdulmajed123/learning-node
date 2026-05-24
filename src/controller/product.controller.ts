@@ -13,6 +13,10 @@ export const productController = async (
   const id =
     urlParts && urlParts[1] === "products" ? Number(urlParts[2]) : null;
   console.log(id);
+  // const id =
+  //   urlParts && urlParts[1] === "products" && urlParts[2]
+  //     ? Number(urlParts[2])
+  //     : null;
 
   // Get All Products
   if (url === "/products" && method === "GET") {
@@ -40,6 +44,7 @@ export const productController = async (
       }),
     );
   } else if (method === "POST" && url === "/products") {
+    // created product by post method
     const body = await parseBody(req);
     const products = readProduct();
 
@@ -56,6 +61,31 @@ export const productController = async (
       JSON.stringify({
         message: "Products create successfully",
         data: newProduct,
+      }),
+    );
+  } else if (method === "PUT" && id !== null) {
+    const body = await parseBody(req);
+    const products = readProduct();
+
+    const index = products.findIndex((p: Iproduct) => p.id === id);
+    console.log(index);
+    if (index < 0) {
+      res.writeHead(404, { "Content-Type": "application/json" });
+      res.end(
+        JSON.stringify({
+          message: "Products Not Found",
+          data: null,
+        }),
+      );
+    }
+    console.log(products[index]);
+    products[index] = { id: products[index].id, ...body };
+    insertProduct(products);
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(
+      JSON.stringify({
+        message: "Product Update  Successfully",
+        data: products[index],
       }),
     );
   }
