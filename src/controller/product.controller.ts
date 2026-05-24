@@ -2,6 +2,7 @@ import type { IncomingMessage, ServerResponse } from "http";
 import { insertProduct, readProduct } from "../service/product.service";
 import type { Iproduct } from "../types/product.type";
 import { parseBody } from "../utility/parseBodey";
+import { sendResponse } from "../utility/sendResponse";
 
 export const productController = async (
   req: IncomingMessage,
@@ -20,38 +21,30 @@ export const productController = async (
 
   // Get All Products
   if (url === "/products" && method === "GET") {
-    // const products = [
-    //   { id: 12, name: "Mouse" },
-    //   { id: 13, name: "Mouse2" },
-    // ];
-    const products = readProduct();
-    res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(
-      JSON.stringify({
-        message: "Products retrived successfully",
-        data: products,
-      }),
-    );
+    try {
+      const products = readProduct();
+      return sendResponse(
+        res,
+        200,
+        true,
+        "Products retrived successfully",
+        products,
+      );
+    } catch (error) {
+      return sendResponse(res, 500, false, "Something Went Wrong", error);
+    }
   } else if (method === "GET" && id !== null) {
     // Get Single Product
     const products = readProduct();
     const product = products.find((p: Iproduct) => p.id === id);
     if (!product) {
-      res.writeHead(404, { "Content-Type": "application/json" });
-      res.end(
-        JSON.stringify({
-          message: "Products Not Found",
-          data: product,
-        }),
-      );
+      try {
+        return sendResponse(res, 404, false, "Products Not Found");
+      } catch (error) {
+        return sendResponse(res, 500, false, "Something Went Wrong", error);
+      }
     }
-    res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(
-      JSON.stringify({
-        message: "Products retrived successfully",
-        data: product,
-      }),
-    );
+    sendResponse(res, 200, true, "Products retrived successfully");
   } else if (method === "POST" && url === "/products") {
     // created product by post method
     const body = await parseBody(req);
