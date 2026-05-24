@@ -68,5 +68,6 @@
     "price": 25000,
     "stock": true,
     "image": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9"
-  }
+  },
+  { "id": 1779598719538, "name": "Mouse 1", "price": 12000, "stock": true }
 ]
